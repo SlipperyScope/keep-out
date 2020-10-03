@@ -12,9 +12,13 @@ export default class LudumWorld {
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
-        this.world.createEntity().addComponent(components.Tile, { x, y });
+        this.world.createEntity()
+          .addComponent(components.Tile, { x, y, id: `${x},${y}`, isOccupied: x === 6 && y < 9 });
       }
     }
+
+    // This entity should get a path that goes all the way down and back up to avoid the wall
+    this.world.createEntity().addComponent(components.Path, { from: [0,0], to: [9,0] });
   }
 
   execute(delta, time) {
