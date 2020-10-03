@@ -1,4 +1,4 @@
-# Ludum 47
+# Ludum 47 [![Netlify Status](https://api.netlify.com/api/v1/badges/72f9dd56-5403-4b7a-bd6c-42714ed43066/deploy-status)](https://slippery-scope-ludum-7.netlify.app/)
 
 Oh boy oh boy, here we go again. This time we're using [Phaser](https://phaser.io/) and the [Phaser 3 Webpack Project Template](https://github.com/photonstorm/phaser3-project-template).
 
