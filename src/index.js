@@ -1,4 +1,4 @@
 import Game from './game.js';
 
 const game = new Game();
-game.scene.start('intro');
+game.scene.start('menu');
