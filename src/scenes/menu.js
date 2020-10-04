@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import logoImg from "../assets/Sprites/logo.png";
-import BrownRock from "../assets/Sprites/brownRock.png"
-import GreenRock from "../assets/Sprites/greenRock.png"
+import BrownRock from "../assets/Sprites/brown_rock.png"
+import GreenRock from "../assets/Sprites/green_rock.png"
 
 export default class Menu extends Phaser.Scene {
   preload() {
