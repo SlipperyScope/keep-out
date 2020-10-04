@@ -1,5 +1,5 @@
 import { System, Not } from 'ecsy';
-import { Tile, Tower, CheckTower, Phaser, Path } from '../components';
+import { Tile, Tower, CheckTower, Path } from '../components';
 
 export default class TowerSystem extends System {
   execute(delta) {
@@ -11,15 +11,10 @@ export default class TowerSystem extends System {
         });
 
         if (matchingTileEntity) {
-            //const game = this.queries.phaser.results[0].getComponent(Phaser).game;
             matchingTileEntity.addComponent(Tower, tower);
             matchingTileEntity.addComponent(CheckTower);
             matchingTileEntity.getMutableComponent(Tile).isOccupied = true;
             matchingTileEntity.addComponent(Path, { from: [0, 0], to: [9,0]});
-
-            //move image to checkTowers
-            //const activeScene = game.scene.scenes.filter(s => game.scene.isVisible(s.scene.key))[0];
-            //activeScene.add.image(0, 0, "logo").setInteractive().setData("coords", [0, 1]);
             
             console.log("Try to add tower at (", tower.x, ", ", tower.y, ")");
         } else {                
@@ -34,5 +29,4 @@ export default class TowerSystem extends System {
 TowerSystem.queries = {
   newTowers: { components: [Tower], listen: { added: true} },
   emptyTiles: { components: [Tile, Not(Tower)]},
-  phaser: { components: [ Phaser ] }
 }
