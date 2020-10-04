@@ -11,9 +11,9 @@ export default class LudumWorld {
       .forEach(component => this.world.registerComponent(component));
 
     this.world
+      .registerSystem(TowerSystem)
       .registerSystem(Grid)
-      .registerSystem(Scenes)
-      .registerSystem(TowerSystem);
+      .registerSystem(Scenes);
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
