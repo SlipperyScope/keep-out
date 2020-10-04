@@ -4,6 +4,7 @@ import logoImg from "../assets/logo.png";
 export default class Menu extends Phaser.Scene {
   preload() {
     this.load.image("logo", logoImg);
+    this.game.world.execute();
   }
 
   create() {

@@ -16,3 +16,8 @@ Path.schema = {
   // Path takes the form of [tile, tile, tile] and represent lol
   path: { type: Types.Array },
 }
+
+export class Phaser extends Component {};
+Phaser.schema = {
+  game: { type: Types.Ref },
+}
