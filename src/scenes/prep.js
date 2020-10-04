@@ -18,9 +18,9 @@ export default class Prep extends Phaser.Scene {
       loop: -1
     });
 
-    const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); 
+    const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     spaceKey.on("down", () => {
-      this.scene.start("play");
+      this.scene.switch("play");
     });
   }
 }
