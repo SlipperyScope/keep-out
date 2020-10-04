@@ -4,6 +4,7 @@ import Grid from './systems/grid.js';
 import Scenes from './systems/scenes.js';
 import TowerSystem from './systems/towers.js';
 import Enemies from './systems/enemies.js';
+import GridRenderer from './systems/screenRenderer';
 
 export default class LudumWorld {
   constructor() {
@@ -15,7 +16,8 @@ export default class LudumWorld {
       .registerSystem(TowerSystem)
       .registerSystem(Grid)
       .registerSystem(Scenes)
-      .registerSystem(Enemies);
+      .registerSystem(Enemies)
+      .registerSystem(GridRenderer);
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
