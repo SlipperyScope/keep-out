@@ -30,4 +30,5 @@ Tower.schema = {
   range: { type: Types.Number },
   rateOfFire: { type: Types.Number },
   areaOfEffect: { type: Types.Boolean },
+  _pool: {type: Types.Boolean },
 }

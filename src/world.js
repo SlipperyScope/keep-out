@@ -15,13 +15,18 @@ export default class LudumWorld {
       .forEach(component => this.world.registerComponent(component));
 
     this.world
+      .registerSystem(TowerSystem)
       .registerSystem(Grid)
+<<<<<<< HEAD
       .registerSystem(Scenes)
 <<<<<<< Updated upstream
       .registerSystem(TowerSystem);
 =======
       .registerSystem(GridRenderer);
 >>>>>>> Stashed changes
+=======
+      .registerSystem(Scenes);
+>>>>>>> origin
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
