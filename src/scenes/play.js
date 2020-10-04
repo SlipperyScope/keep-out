@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import logoImg from "../assets/logo.png";
+import { EnemyEmitter } from "../components";
 
 export default class Play extends Phaser.Scene {
   preload() {
@@ -7,17 +8,7 @@ export default class Play extends Phaser.Scene {
   }
 
   create() {
-    const logo = this.add.image(0, 0, "logo");
-
-    this.tweens.add({
-      targets: logo,
-      x: 1280,
-      y: 720,
-      duration: 1000,
-      ease: "Power2",
-      yoyo: true,
-      loop: -1
-    });
+    this.game.world.createEntity().addComponent(EnemyEmitter, { isRunning: true, remaining: 30, releaseRate: 10 });
 
     const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     spaceKey.on("down", () => {
