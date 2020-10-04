@@ -1,11 +1,7 @@
 import { System } from 'ecsy';
 import { Phaser } from '../components';
 
-export default class GridSystem extends System {
-  constructor() {
-    super(...arguments);
-  }
-
+export default class ScenesSystem extends System {
   execute() {
     const game = this.queries.phaser.results[0].getComponent(Phaser).game;
     const activeScene = game.scene.scenes.filter(s => game.scene.isVisible(s.scene.key))[0];
@@ -16,6 +12,6 @@ export default class GridSystem extends System {
   }
 }
 
-GridSystem.queries = {
+ScenesSystem.queries = {
   phaser: { components: [ Phaser ] },
 };
