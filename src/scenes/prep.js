@@ -4,7 +4,6 @@ import logoImg from "../assets/logo.png";
 export default class Prep extends Phaser.Scene {
   preload() {
     this.load.image("logo", logoImg);
-    this.game.world.execute();
   }
 
   create() {

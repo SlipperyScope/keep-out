@@ -5,7 +5,6 @@ import {Tower} from "../components";
 export default class Play extends Phaser.Scene {
   preload() {
     this.load.image("logo", logoImg);
-    this.game.world.execute();
   }
 
   create() {
@@ -30,7 +29,6 @@ export default class Play extends Phaser.Scene {
     tKey.on("down", () => {
       console.log("add tower");
       this.game.world.world.createEntity().addComponent(Tower, {x: 4, y: 4});
-      this.game.world.execute();
     });
   }
 }
