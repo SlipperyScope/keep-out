@@ -21,3 +21,13 @@ export class Phaser extends Component {};
 Phaser.schema = {
   game: { type: Types.Ref },
 }
+
+export class Tower extends Component {};
+Tower.schema = {
+  x:            { type: Types.Number },
+  y:            { type: Types.Number },
+  damage:       { type: Types.Number  },
+  range:        { type: Types.Number  },
+  rateOfFire:   { type: Types.Number  },
+  areaOfEffect: { type: Types.Boolean },
+}
