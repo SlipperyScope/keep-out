@@ -42,8 +42,10 @@ export default class GridSystem extends System {
       if (!tile.isOccupied) {
         const neighbors = this.getNeighbors(tile.x, tile.y);
         neighbors.forEach(neighbor => {
-          if (!neighbor.getComponent(Tile).isOccupied) {
-            this.graph.addLink(tile.id, neighbor.getComponent(Tile).id);
+          const nid = neighbor.getComponent(Tile).id;
+          const alreadyLinked = this.graph.hasLink(tile.id, nid) || this.graph.hasLink(nid, tile.id);
+          if (!neighbor.getComponent(Tile).isOccupied && !alreadyLinked) {
+            this.graph.addLink(tile.id, nid);
           }
         });
       }
@@ -58,9 +60,15 @@ export default class GridSystem extends System {
       const tile = ent.getComponent(Tile);
       if (tile.isOccupied) {
         // Remove edges
-        this.graph.forEachLinkedNode(tile.id, (node, link) => {
-          this.graph.removeLink(link);
+        const toRemove = [];
+        this.graph.forEachLink(link => {
+          if (link.fromId === tile.id || link.toId === tile.id) {
+            toRemove.push(link);
+          }
         });
+        while (toRemove.length) {
+          this.graph.removeLink(toRemove.shift());
+        }
       } else {
         // Add edges
         const neighbors = this.getNeighbors(tile.x, tile.y);
@@ -96,10 +104,10 @@ export default class GridSystem extends System {
     for (let y = 0; y <= this.height; y++) {
       const row = [];
       for (let x = 0; x <= this.width; x++) {
-        if (path.find(n => n[0] === x && n[1] === y)) {
-          row.push('▣'); // The path
-        } else if (this.grid[`${x},${y}`].getComponent(Tile).isOccupied) {
+        if (this.grid[`${x},${y}`].getComponent(Tile).isOccupied) {
           row.push('▦');
+        } else if (path.find(n => n[0] === x && n[1] === y)){
+          row.push('▣'); // The path
         } else {
           row.push('▢');
         }
