@@ -36,8 +36,6 @@ export default class GridSystem extends System {
       return hash;
     }, {});
 
-    console.table(tiles.map(t => t.getComponent(Tile)));
-
     this.queries.tiles.added.forEach(ent => {
       const tile = ent.getComponent(Tile);
       this.graph.addNode(tile.id, { x: tile.x, y: tile.y });

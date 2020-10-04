@@ -1,6 +1,7 @@
 import { World } from 'ecsy';
 import * as components from './components.js';
 import Grid from './systems/grid.js';
+import Scenes from './systems/scenes.js';
 
 export default class LudumWorld {
   constructor() {
@@ -8,7 +9,9 @@ export default class LudumWorld {
     Object.values(components)
       .forEach(component => this.world.registerComponent(component));
 
-    this.world.registerSystem(Grid);
+    this.world
+      .registerSystem(Grid)
+      .registerSystem(Scenes);
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {
