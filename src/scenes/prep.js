@@ -14,5 +14,12 @@ export default class Prep extends Phaser.Scene {
       console.log("add tower");
       this.game.world.createEntity().addComponent(Tower, {x: 0, y: 4});
     });
+    console.log("cache stuff: ", this.game.cache);
+  }
+
+  onObjectClicked(gameObject) {
+    const coords = gameObject.getData("coords");
+    console.log("clicked: ", coords);
+    this.game.world.createEntity().addComponent(Tower, {x: coords[0], y: coords[1]});
   }
 }
