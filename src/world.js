@@ -3,7 +3,7 @@ import * as components from './components.js';
 import Grid from './systems/grid.js';
 import Scenes from './systems/scenes.js';
 import TowerSystem from './systems/towers.js';
-import GridRenderer from './systems/gridRenderer';
+import GridRenderer from './systems/screenRenderer';
 
 export default class LudumWorld {
   constructor() {
