@@ -32,3 +32,24 @@ Tower.schema = {
   areaOfEffect: { type: Types.Boolean },
   _pool: {type: Types.Boolean },
 }
+
+export class Enemy extends Component {};
+Enemy.schema = {
+  name: { type: Types.String },
+  health: { type: Types.Number },
+  speed: { type: Types.Number },
+}
+
+export class Location extends Component {}
+Location.schema = {
+  x: { type: Types.Number },
+  y: { type: Types.Number },
+}
+
+export class EnemyEmitter extends Component {};
+EnemyEmitter.schema = {
+  isRunning: { type: Types.Boolean },
+  remaining: { type: Types.Number },
+  releaseRate: { type: Types.Number },
+  cooldown: { type: Types.Number },
+}
