@@ -6,7 +6,7 @@ export default class GridRenderSystem extends System {
     const game = this.queries.phaser.results[0].getComponent(Phaser).game;
     const activeScene = game.scene.scenes.filter(s => game.scene.isVisible(s.scene.key))[0];
 
-    //Add things to the active scene outside the switch to add to all scenes.
+    // Add things to the active scene outside the switch to add to all scenes.
     activeScene.add.image(500, 500, "brownRock");
 
     // Add UI elements to particular scenes
@@ -22,6 +22,7 @@ export default class GridRenderSystem extends System {
         activeScene.add.text(700,700,"play")
         tileResults.forEach( ent => {
           const tile = ent.getComponent(Tile);
+
           // add text at tile.x, tile.y except project coordinates of tiles to coordinates of canvas
           const xLocation =tile.x * 100 + 100
           const yLocation = tile.y * 20 + 100
