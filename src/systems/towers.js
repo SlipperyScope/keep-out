@@ -5,12 +5,9 @@ export default class TowerSystem extends System {
   execute(delta) {
     this.queries.newTowers.results.forEach(t => {           
         let tower = t.getComponent(Tower);
-        let matchingTileEntity;
-        this.queries.emptyTiles.results.forEach(et => {                              
-            let tile = et.getComponent(Tile);
-            if (tile.x == tower.x && tile.y == tower.y) {                   
-                matchingTileEntity = et;
-            }
+        let matchingTileEntity = this.queries.emptyTiles.results.find(et => {
+            let { x, y } = et.getComponent(Tile);
+            return x === tower.x && y === tower.y;
         });
 
         if (matchingTileEntity) {
