@@ -10,16 +10,17 @@ export default class GridRenderSystem extends System {
     activeScene.add.image(500, 500, "brownRock");
 
     // Add UI elements to particular scenes
+    activeScene.add.text(700,700,activeScene.scene.key);
     switch (activeScene.scene.key){
       case "menu":
-        activeScene.add.text(700,700,"menu")
+        //activeScene.add.text(700,700,"menu")
         break;
       case "prep":
-        activeScene.add.text(700,700,"prep")
-          break;
+        //activeScene.add.text(700,700,"prep")
+        //  break;
       case "play":
         const tileResults = this.queries.tiles.results;
-        activeScene.add.text(700,700,"play")
+        //activeScene.add.text(700,700,"play")
         tileResults.forEach( ent => {
           const tile = ent.getComponent(Tile);
 
@@ -28,6 +29,7 @@ export default class GridRenderSystem extends System {
           const yLocation = tile.y * 20 + 100
           // activeScene.add.text(xLocation, yLocation, tile.isOccupied ? " " : "X");
           const sprite = activeScene.add.image(xLocation, yLocation, tile.isOccupied? "greenRock": "brownRock")
+          sprite.setInteractive().setData("coords", [tile.x, tile.y]);
           sprite.scaleX =.1
           sprite.scaleY = .1
         });
