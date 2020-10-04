@@ -1,8 +1,9 @@
 import Phaser from "phaser";
-import logoImg from "../assets/Sprites/logo.png";
+import { EnemyEmitter } from "../components";
 
 export default class Play extends Phaser.Scene {
   create() {
+    this.game.world.createEntity().addComponent(EnemyEmitter, { isRunning: true, remaining: 30, releaseRate: 10 });
 
     const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     spaceKey.on("down", () => {

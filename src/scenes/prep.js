@@ -27,7 +27,7 @@ export default class Prep extends Phaser.Scene {
     const tKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
     tKey.on("down", () => {
       console.log("add tower");
-      this.game.world.world.createEntity().addComponent(Tower, {x: 0, y: 4});
+      this.game.world.createEntity().addComponent(Tower, {x: 0, y: 4});
     });
   }
 }
