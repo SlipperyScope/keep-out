@@ -1,4 +1,4 @@
-import { Component, Types } from 'ecsy';
+import { Component, Types, TagComponent } from 'ecsy';
 
 export class Tile extends Component {};
 Tile.schema = {
@@ -32,6 +32,8 @@ Tower.schema = {
   areaOfEffect: { type: Types.Boolean },
   _pool: {type: Types.Boolean },
 }
+
+export class CheckTower extends TagComponent {};
 
 export class Enemy extends Component {};
 Enemy.schema = {
