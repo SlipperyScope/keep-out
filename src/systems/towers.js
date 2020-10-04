@@ -3,7 +3,7 @@ import { Tile, Tower } from '../components';
 
 export default class TowerSystem extends System {
   execute(delta) {
-    this.queries.newTowers.results.forEach(t => {           
+    this.queries.newTowers.added.forEach(t => {           
         let tower = t.getComponent(Tower);
         let matchingTileEntity = this.queries.emptyTiles.results.find(et => {
             let { x, y } = et.getComponent(Tile);
@@ -11,8 +11,7 @@ export default class TowerSystem extends System {
         });
 
         if (matchingTileEntity) {
-            const towerData = {x: tower.x, y: tower.y, damage: tower.damage};
-            matchingTileEntity.addComponent(Tower, towerData);
+            matchingTileEntity.addComponent(Tower, tower);
             matchingTileEntity.getMutableComponent(Tile).isOccupied = true;
             console.log("Found match for (", tower.x, ", ", tower.y, ")");
         } else {                
