@@ -2,11 +2,8 @@ import { World } from 'ecsy';
 import * as components from './components.js';
 import Grid from './systems/grid.js';
 import Scenes from './systems/scenes.js';
-<<<<<<< Updated upstream
 import TowerSystem from './systems/towers.js';
-=======
-import GridRenderer from './systems/gridRenderer'
->>>>>>> Stashed changes
+import GridRenderer from './systems/gridRenderer';
 
 export default class LudumWorld {
   constructor() {
@@ -17,16 +14,8 @@ export default class LudumWorld {
     this.world
       .registerSystem(TowerSystem)
       .registerSystem(Grid)
-<<<<<<< HEAD
       .registerSystem(Scenes)
-<<<<<<< Updated upstream
-      .registerSystem(TowerSystem);
-=======
       .registerSystem(GridRenderer);
->>>>>>> Stashed changes
-=======
-      .registerSystem(Scenes);
->>>>>>> origin
 
     for (let y = 0; y < 10; y++) {
       for (let x = 0; x < 10; x++) {

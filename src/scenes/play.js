@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import logoImg from "../assets/logo.png";
+import logoImg from "../assets/Sprites/logo.png";
 
 export default class Play extends Phaser.Scene {
   preload() {

@@ -7,7 +7,7 @@ export default class ScenesSystem extends System {
     const activeScene = game.scene.scenes.filter(s => game.scene.isVisible(s.scene.key))[0];
 
     if (activeScene) {
-      activeScene.add.text(Math.random() * game.config.width, Math.random() * game.config.height, 'Job is finished');
+      // activeScene.add.text(Math.random() * game.config.width, Math.random() * game.config.height, 'Job is finished');
     }
   }
 }
