@@ -28,7 +28,7 @@ Tower.schema = {
   y: { type: Types.Number },
   range: { type: Types.Number, default: 1 },
   damage: { type: Types.Number, default: 10 },
-  rateOfFire: { type: Types.Number, default: 3 },
+  rateOfFire: { type: Types.Number, default: 4 },
   cooldown: { type: Types.Number },
   areaOfEffect: { type: Types.Boolean },
   price: {type: Types.Number, default: 50},

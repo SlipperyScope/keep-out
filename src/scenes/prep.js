@@ -26,13 +26,16 @@ export default class Prep extends SuperScene {
     this.input.on("gameobjectout", (p, g) => this.onObjectOut(g));
 
     const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    const db = this.sound.add("doperBeats");
+    db.play();
+
     spaceKey.on("down", () => {
       this.scene.switch("play");
     });
 
     const menuHeight = 700;
     this.menu = new MenuObject(this, this.game.config.width, this.game.config.height - menuHeight, menuHeight);
-    this.menu.addStoreItem({ range: 1, fireRate: 3, price: 50, key: 'tower1' });
+    this.menu.addStoreItem({ range: 1, fireRate: 4, price: 50, key: 'tower1' });
 
     // These don't actually work. I think it's because of the menu switching and I don't care
     // enough fix it yet.
