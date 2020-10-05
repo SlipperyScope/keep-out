@@ -12,13 +12,12 @@ export default class GridRenderSystem extends System {
     activeScene.add.image(500, 500, "brownRock");
 
     // Add UI elements to particular scenes
+    activeScene.add.text(700, 700, activeScene.scene.key);
     switch (activeScene.scene.key) {
       case "menu":
-        activeScene.add.text(700, 700, "menu");
         break;
       case "prep":
-        activeScene.add.text(700, 700, "prep");
-        break;
+      //  break;
       case "play":
         const activeEnemies = this.queries.enemies.results;
         activeEnemies.forEach((ent) => {
@@ -44,7 +43,7 @@ export default class GridRenderSystem extends System {
         });
 
         const tileResults = this.queries.tiles.results;
-        activeScene.add.text(700, 700, "play");
+        //activeScene.add.text(700,700,"play")
         tileResults.forEach((ent) => {
           const tile = ent.getComponent(Tile);
           // add text at tile.x, tile.y except project coordinates of tiles to coordinates of canvas
@@ -55,6 +54,7 @@ export default class GridRenderSystem extends System {
             yLocation,
             tile.isOccupied ? "greenRock" : "brownRock"
           );
+          sprite.setInteractive().setData("coords", [tile.x, tile.y]);
           sprite.scaleX = 0.1;
           sprite.scaleY = 0.1;
         });

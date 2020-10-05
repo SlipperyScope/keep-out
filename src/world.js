@@ -30,6 +30,8 @@ export default class LudumWorld {
 
     // This entity should get a path that goes all the way down and back up to avoid the wall
     this.world.createEntity().addComponent(components.Path, { from: [0,0], to: [9,0] });
+
+    this.world.createEntity().addComponent(components.Stats, {points: 0, health: 69, money: 420, BAWN: false});
   }
 
   execute(delta, time) {
