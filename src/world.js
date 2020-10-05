@@ -26,7 +26,7 @@ export default class LudumWorld {
     for (let y = 0; y < 6; y++) {
       for (let x = 0; x < 12; x++) {
         this.world.createEntity()
-          .addComponent(components.Tile, { x, y, id: `${x},${y}`, isOccupied: x === 6 && y < 5 });
+          .addComponent(components.Tile, { x, y, id: `${x},${y}`});
       }
     }
 

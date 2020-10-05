@@ -35,6 +35,18 @@ Tower.schema = {
   _pool: {type: Types.Boolean }, //gamejam btw
 }
 
+export class TowerHover extends Component {};
+TowerHover.schema = {
+  x: { type: Types.Number },
+  y: { type: Types.Number },
+}
+
+export class TowerHoverEnd extends Component {};
+TowerHoverEnd.schema = {
+  x: { type: Types.Number },
+  y: { type: Types.Number },
+}
+
 export class Enemy extends Component {};
 Enemy.schema = {
   name: { type: Types.String },
@@ -70,3 +82,4 @@ Stats.schema = {
 }
 
 export class CheckTower extends TagComponent {};
+export class ShowRange extends TagComponent {};

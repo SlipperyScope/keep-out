@@ -1,16 +1,20 @@
 import { System } from "ecsy";
-import { Enemy, Location, Path, Phaser, Tile, Sprite } from "../components";
+import { Enemy, Location, Path, Phaser, Tile, Sprite, ShowRange } from "../components";
 import translateToScreen from "../Utils/translateToScreen";
 
 export default class GridRenderSystem extends System {
   execute() {
     const game = this.queries.phaser.results[0].getComponent(Phaser).game;
+    
     const activeScene = game.scene.scenes.filter((s) =>
       game.scene.isVisible(s.scene.key)
     )[0];
 
     // Add things to the active scene outside the switch to add to all scenes.
-    const tileScenes = game.scene.scenes.filter((s) => s.scene.key === "prep" || s.scene.key === "play");
+    const tileScenes = [
+      game.scene.getScene("play"),
+      game.scene.getScene("prep"),
+    ];
 
     // Add UI elements to particular scenes
     activeScene.add.text(700, 700, activeScene.scene.key);
@@ -55,11 +59,13 @@ export default class GridRenderSystem extends System {
                 screenCords.y,
                 tile.isOccupied ? "TurretTile" : "EmptyTile"
               );
+
               sprite.setInteractive().setData("coords", [tile.x, tile.y]);
               sprite.displayHeight = sprite.displayWidth = 80
             });
             ent.addComponent(Sprite, {sprite});
           }
+          ent.getMutableComponent(Sprite).sprite.tint = ent.hasComponent(ShowRange) ? 0xFF0000 : 0xFFFFFF;
         });
         break;
       default:
@@ -81,4 +87,5 @@ GridRenderSystem.queries = {
   tiles: { components: [Tile], listen: { added: true, modified: true } },
   enemies: { components: [Enemy, Path, Location] },
   sprites: { components: [Sprite], listen: { removed: true } },
+  showRanges: { components: [ShowRange] },
 };
