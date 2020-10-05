@@ -5,6 +5,8 @@ export default class EnemiesSystem extends System {
   constructor() {
     super(...arguments);
     this.index = 0;
+    this.curIndex = 0;
+
   }
 
   execute() {
@@ -23,19 +25,38 @@ export default class EnemiesSystem extends System {
           ent.removeAllComponents();
       }
       if (path.path.length) {
-        const currentIndex = path.path.findIndex(coord => coord[0] === location.x && coord[1] === location.y);
-        if (currentIndex === path.path.length - 1) {
+        // const currentIndex = path.path.findIndex(coord => coord[0] === location.x && coord[1] === location.y);
+        let currentIndex = 0;
+
+        if (this.curIndex === path.path.length - 1) {
           stats.health -= 1;
           console.log(`${enemy.name} made it to the end. You have ${stats.health} hp`);
           ent.removeAllComponents();
         } else {
-          const [nextX, nextY] = path.path[currentIndex + 1];
-          location.x = nextX;
-          location.y = nextY;
+          const [nextX, nextY] = path.path[this.curIndex + 1];
+          if(location.x >=nextX || location.y >= nextY) {this.curIndex+=1}
+
+          console.log(location.x,nextX,location.y,nextY);
+          location.x +=  this.checkNums(location.x,nextX) *.05  ;
+          location.y += this.checkNums(location.y,nextY) *.05;
+
+          // const [nextX, nextY] = path.path[currentIndex + 1];
+          // location.x = nextX;
+          // location.y = nextY;
+
           // console.log(`${enemy.name} moved to (${nextX}, ${nextY})`);
         }
       }
     });
+  }
+
+  checkNums(origin,next){
+    if(origin === next){
+      return 0
+    }else if (next > origin){
+      return +1
+    }
+    return -1
   }
 
   updateEmitter() {
@@ -47,7 +68,7 @@ export default class EnemiesSystem extends System {
         if (emitter.cooldown === 0) {
           // Add an enemy. Is this an okay thing to do? Idk, it works...
           game.world.createEntity()
-            .addComponent(Enemy, { name: `Enemy ${this.index}`, health: 20, speed: 1 })
+            .addComponent(Enemy, { name: `Enemy ${this.index}`, health: 20, speed: .01 })
             .addComponent(Path, { from: [0,0], to: [11,3] })
             .addComponent(Location, { x: 0, y: 0 })
 
