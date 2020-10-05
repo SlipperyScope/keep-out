@@ -1,23 +1,41 @@
 import { System } from 'ecsy';
-import { Tile, Tower, CheckTower, Path } from '../components';
+import { Tile, Tower, CheckTower, Path, Stats } from '../components';
 
 export default class CheckTowerSystem extends System {
     execute(delta) {
         this.queries.toCheck.results.forEach(ent => {
-            if (ent.getComponent(Path).path.length) {
-                console.log("Tower successfully added at (", ent.getComponent(Tower).x, ent.getComponent(Tower).y, ")");
+            let stats = this.queries.stats.results[0].getMutableComponent(Stats);
+            const tower = ent.getComponent(Tower);
+            if (this.checkPath(ent.getComponent(Path).path) && this.checkMoney(stats, tower)) {
+                stats.money -= tower.price;
+                console.log("Tower successfully added at (", tower.x, tower.y, "). You have $",stats.money);
             } else {
-                console.log("Tower would block path at (", ent.getComponent(Tower).x, ent.getComponent(Tower).y, ")");
                 ent.removeComponent(Tower);
                 ent.getMutableComponent(Tile).isOccupied = false;
             }
             ent.removeComponent(Path);
             ent.removeComponent(CheckTower);
         });
+    }
 
+    checkPath(path) {
+        const goodPath = path.length;
+        if (!goodPath) {
+            console.log("Tower would block path");
+        }
+        return goodPath;
+    }
+
+    checkMoney(stats, tower) {
+        const canAfford = tower.price <= stats.money;
+        if (!canAfford) {
+            console.log("Not enough money for tower at (", tower.x, tower.y, "). You have $",stats.money);
+        }
+        return canAfford;
     }
 
 }
 CheckTowerSystem.queries = { 
   toCheck: { components: [Tower, CheckTower, Tile, Path] },
+  stats: { components: [Stats]},
 }
