@@ -7,7 +7,7 @@ export default class Play extends SuperScene {
     super.create();
     this.game.world.createEntity().addComponent(EnemyEmitter, { isRunning: true, remaining: 30, releaseRate: 10 });
 
-    this.hud = new Hud(this, 50, this.game.config.height - 100);
+    this.hud = new Hud(this, 40, this.game.config.height - 100);
 
     const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     spaceKey.on("down", () => {
@@ -23,14 +23,17 @@ class Hud extends Phaser.GameObjects.Container {
 
     this.text = scene.add.text(0, 0, 'XX', {
       fontFamily: 'sans-serif',
-      fontSize: 28,
+      fontSize: 32,
       color: '#F00',
       shadow: {
         offsetX: 2,
         offsetY: 2,
         color: '#000',
         blur: 1,
-      }
+        stroke: true,
+      },
+      stroke: '#FFF',
+      strokeThickness: 2,
     });
 
     this.add(this.text);

@@ -11,6 +11,7 @@ const textStyleBig = {
     offsetY: 1,
     color: '#000',
     blur: 0,
+    fill: true,
   }
 }
 

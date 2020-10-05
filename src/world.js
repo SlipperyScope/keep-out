@@ -6,6 +6,7 @@ import TowerSystem from './systems/towers.js';
 import CheckTowerSystem from './systems/checkTowers.js';
 import Enemies from './systems/enemies.js';
 import GridRenderer from './systems/screenRenderer';
+import Hud from './systems/hud';
 
 export default class LudumWorld {
   constructor() {
@@ -19,7 +20,8 @@ export default class LudumWorld {
       .registerSystem(CheckTowerSystem)
       .registerSystem(Scenes)
       .registerSystem(Enemies)
-      .registerSystem(GridRenderer);
+      .registerSystem(GridRenderer)
+      .registerSystem(Hud);
 
     for (let y = 0; y < 6; y++) {
       for (let x = 0; x < 12; x++) {
