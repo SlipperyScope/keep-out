@@ -14,7 +14,7 @@ export default class TowerSystem extends System {
             matchingTileEntity.addComponent(Tower, tower);
             matchingTileEntity.addComponent(CheckTower);
             matchingTileEntity.getMutableComponent(Tile).isOccupied = true;
-            matchingTileEntity.addComponent(Path, { from: [0, 0], to: [9,0]});
+            matchingTileEntity.addComponent(Path, { from: [0, 0], to: [11,3]});
             
             console.log("Try to add tower at (", tower.x, ", ", tower.y, ")");
         } else {                

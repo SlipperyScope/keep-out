@@ -48,7 +48,7 @@ export default class EnemiesSystem extends System {
           // Add an enemy. Is this an okay thing to do? Idk, it works...
           game.world.createEntity()
             .addComponent(Enemy, { name: `Enemy ${this.index}`, health: 20, speed: 1 })
-            .addComponent(Path, { from: [0,0], to: [9,0] })
+            .addComponent(Path, { from: [0,0], to: [11,3] })
             .addComponent(Location, { x: 0, y: 0 })
 
           this.index++;

@@ -1,5 +1,5 @@
 const translateToScreen = (xCord,yCord) => {
- return {x: xCord * 100 + 100, y: yCord * 20 + 100}
+ return {x: xCord * 80 + 60, y: yCord * 80 + 165}
 }
 
 export default translateToScreen;

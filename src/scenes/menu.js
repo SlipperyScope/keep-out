@@ -1,15 +1,17 @@
 import Phaser from "phaser";
-import logoImg from "../assets/Sprites/logo.png";
-import BrownRock from "../assets/Sprites/brown_rock.png";
-import GreenRock from "../assets/Sprites/green_rock.png";
-import BadRock from "../assets/Sprites/bad_rock.png";
+import Background from "../assets/Sprites/background.png"
+import Turretbase from "../assets/Sprites/turret-tile-base.png"
+import EmptyTile from "../assets/Sprites/empty-tile.png"
+import robot from "../assets/Sprites/robot-1.png"
+import TurretTile from "../assets/Sprites/turret-tile.png"
 
 export default class Menu extends Phaser.Scene {
   preload() {
-    this.load.image("logo", logoImg);
-    this.load.image("brownRock", BrownRock);
-    this.load.image("greenRock", GreenRock);
-    this.load.image("badRock", BadRock);
+    this.load.image("Background",Background);
+    this.load.image("Turretbase",Turretbase);
+    this.load.image("EmptyTile",EmptyTile);
+    this.load.image("robot",robot);
+    this.load.image("TurretTile",TurretTile);
   }
 
   create() {

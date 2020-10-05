@@ -10,7 +10,10 @@ export default class GridRenderSystem extends System {
     )[0];
 
     // Add things to the active scene outside the switch to add to all scenes.
-    activeScene.add.image(500, 500, "brownRock");
+    const background = activeScene.add.image(640,360,"Background")
+    background.displayWidth = game.config.width
+    background.displayHeight = game.config.height
+
 
     // Add UI elements to particular scenes
     activeScene.add.text(700, 700, activeScene.scene.key);
@@ -33,10 +36,9 @@ export default class GridRenderSystem extends System {
             const enemySprite = activeScene.add.image(
                 screenCords.x,
                 screenCords.y,
-              "badRock"
+              "robot"
             );
-            enemySprite.scaleX = 0.1;
-            enemySprite.scaleY = 0.1;
+            enemySprite.displayHeight = enemySprite.displayWidth = 40
             enemySprite.depth = 1;
             ent.addComponent(Sprite, { sprite: enemySprite });
           }
@@ -51,11 +53,10 @@ export default class GridRenderSystem extends System {
           const sprite = activeScene.add.image(
             screenCords.x,
             screenCords.y,
-            tile.isOccupied ? "greenRock" : "brownRock"
+            tile.isOccupied ? "TurretTile" : "EmptyTile"
           );
           sprite.setInteractive().setData("coords", [tile.x, tile.y]);
-          sprite.scaleX = 0.1;
-          sprite.scaleY = 0.1;
+          sprite.displayHeight = sprite.displayWidth = 80
         });
         break;
       default:

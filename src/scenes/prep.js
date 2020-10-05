@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import logoImg from "../assets/Sprites/logo.png";
 import {Tower} from "../components";
 
 export default class Prep extends Phaser.Scene {
