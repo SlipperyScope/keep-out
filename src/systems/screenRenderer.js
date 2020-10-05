@@ -10,9 +10,9 @@ export default class GridRenderSystem extends System {
     )[0];
 
     // Add things to the active scene outside the switch to add to all scenes.
-    const backGround = activeScene.add.image(640,360,"BackGround")
-    backGround.scaleX = 0.34
-    backGround.scaleY = 0.34
+    const background = activeScene.add.image(640,360,"Background")
+    background.displayWidth = game.config.width
+    background.displayHeight = game.config.height
 
 
     // Add UI elements to particular scenes
@@ -53,7 +53,7 @@ export default class GridRenderSystem extends System {
           const sprite = activeScene.add.image(
             screenCords.x,
             screenCords.y,
-            tile.isOccupied ? "Turretbase" : "EmptyTile"
+            tile.isOccupied ? "TurretTile" : "EmptyTile"
           );
           sprite.setInteractive().setData("coords", [tile.x, tile.y]);
           sprite.displayHeight = sprite.displayWidth = 80
