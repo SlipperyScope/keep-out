@@ -8,7 +8,9 @@ import MenuBackground from "../assets/Sprites/menu-background.png"
 import StoreTileBg from "../assets/Sprites/shop-card.png";
 import StoreCardTower1 from "../assets/Sprites/shop-tower-basic.png";
 import MainMenuArt from "../assets/Sprites/menu-art.png";
+import MediGame from "../assets/Audio/MedievalDefence.wav";
 import MediMenu from "../assets/Audio/MedievalMenu.mp3";
+
 import SuperScene from "./super";
 
 export default class Menu extends SuperScene {
@@ -24,15 +26,18 @@ export default class Menu extends SuperScene {
     this.load.image("StoreCardTower1", StoreCardTower1);
 
     this.load.audio("dopeBeats", MediMenu);
+    this.load.audio("doperBeats", MediGame);
   }
 
   create() {
     super.create();
-    this.sound.add("dopeBeats").play();
+    const db = this.sound.add("dopeBeats");
+    db.play();
     const spaceKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
     );
     spaceKey.on("down", () => {
+      db.stop();
       this.scene.switch("prep");
     });
 
