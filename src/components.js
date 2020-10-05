@@ -26,11 +26,12 @@ export class Tower extends Component {};
 Tower.schema = {
   x: { type: Types.Number },
   y: { type: Types.Number },
-  damage: { type: Types.Number },
   range: { type: Types.Number },
+  damage: { type: Types.Number },
   rateOfFire: { type: Types.Number },
   areaOfEffect: { type: Types.Boolean },
-  _pool: {type: Types.Boolean },
+  price: {type: Types.Number, default: 50},
+  _pool: {type: Types.Boolean }, //gamejam btw
 }
 
 export class CheckTower extends TagComponent {};
@@ -54,4 +55,12 @@ EnemyEmitter.schema = {
   remaining: { type: Types.Number },
   releaseRate: { type: Types.Number },
   cooldown: { type: Types.Number },
+}
+
+export class Stats extends Component {};
+Stats.schema = {
+  points: { type: Types.Number },
+  health: { type: Types.Number },
+  money: { type: Types.Number },
+  BAWN: { type: Types.Boolean },
 }
