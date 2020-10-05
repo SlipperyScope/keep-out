@@ -18,6 +18,10 @@ export default class EnemiesSystem extends System {
       const location = ent.getMutableComponent(Location);
       const path = ent.getComponent(Path);
       const enemy = ent.getComponent(Enemy);
+      if (enemy.health <= 0) {
+          console.log(`${enemy.name} has died`);
+          ent.removeAllComponents();
+      }
       if (path.path.length) {
         const currentIndex = path.path.findIndex(coord => coord[0] === location.x && coord[1] === location.y);
         if (currentIndex === path.path.length - 1) {
