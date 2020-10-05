@@ -38,6 +38,7 @@ export default class GridRenderSystem extends System {
                 screenCords.y,
               "robot"
             );
+            enemySprite.displayHeight = enemySprite.displayWidth = 40
             enemySprite.depth = 1;
             ent.addComponent(Sprite, { sprite: enemySprite });
           }
@@ -55,7 +56,7 @@ export default class GridRenderSystem extends System {
             tile.isOccupied ? "Turretbase" : "EmptyTile"
           );
           sprite.setInteractive().setData("coords", [tile.x, tile.y]);
-          sprite.scaleX = sprite.scaleY = 0.476;
+          sprite.displayHeight = sprite.displayWidth = 80
         });
         break;
       default:
