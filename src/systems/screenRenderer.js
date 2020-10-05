@@ -63,6 +63,13 @@ export default class GridRenderSystem extends System {
         activeScene.add.text(700, 700, "bad scene");
         break;
     }
+  this.destroyRemovedSprites()
+}
+
+  destroyRemovedSprites() {
+    this.queries.sprites.removed.forEach(s => {
+      s.getRemovedComponent(Sprite).sprite.destroy();
+    });
   }
 }
 
@@ -70,5 +77,5 @@ GridRenderSystem.queries = {
   phaser: { components: [Phaser] },
   tiles: { components: [Tile], listen: { added: true, modified: true } },
   enemies: { components: [Enemy, Path, Location] },
-  sprite: { components: [Sprite] },
+  sprites: { components: [Sprite], listen: { removed: true } },
 };
