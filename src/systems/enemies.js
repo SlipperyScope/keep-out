@@ -1,5 +1,5 @@
 import { System } from 'ecsy';
-import { Phaser, Path, EnemyEmitter, Enemy, Location } from '../components';
+import { Phaser, Path, EnemyEmitter, Enemy, Location, Stats } from '../components';
 
 export default class EnemiesSystem extends System {
   constructor() {
@@ -13,6 +13,7 @@ export default class EnemiesSystem extends System {
   }
 
   updateEnemies() {
+    let stats = this.queries.stats.results[0].getMutableComponent(Stats);
     this.queries.enemies.results.forEach(ent => {
       const location = ent.getMutableComponent(Location);
       const path = ent.getComponent(Path);
@@ -20,7 +21,8 @@ export default class EnemiesSystem extends System {
       if (path.path.length) {
         const currentIndex = path.path.findIndex(coord => coord[0] === location.x && coord[1] === location.y);
         if (currentIndex === path.path.length - 1) {
-          console.log(`${enemy.name} made it to the end`);
+          stats.health -= 1;
+          console.log(`${enemy.name} made it to the end. You have ${stats.health} hp`);
           ent.removeAllComponents();
         } else {
           const [nextX, nextY] = path.path[currentIndex + 1];
@@ -65,5 +67,6 @@ export default class EnemiesSystem extends System {
 EnemiesSystem.queries = {
   emitters: { components: [ EnemyEmitter ] },
   enemies: { components: [ Enemy, Path, Location ] },
-  phaser: { components: [ Phaser ] }
+  phaser: { components: [ Phaser ] },
+  stats: { components: [Stats]},
 }
