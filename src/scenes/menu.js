@@ -7,6 +7,7 @@ import TurretTile from "../assets/Sprites/turret-tile.png"
 import MenuBackground from "../assets/Sprites/menu-background.png"
 import StoreTileBg from "../assets/Sprites/shop-card.png";
 import StoreCardTower1 from "../assets/Sprites/shop-tower-basic.png";
+import MediMenu from "../assets/Audio/MedievalMenu.wav";
 import SuperScene from "./super";
 
 export default class Menu extends SuperScene {
@@ -19,10 +20,12 @@ export default class Menu extends SuperScene {
     this.load.image("MenuBackground", MenuBackground);
     this.load.image("StoreTileBg", StoreTileBg);
     this.load.image("StoreCardTower1", StoreCardTower1);
+    this.load.audio("dopeBeats", MediMenu);
   }
 
   create() {
     super.create();
+    this.sound.add("dopeBeats").play();
     const spaceKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE
     );
