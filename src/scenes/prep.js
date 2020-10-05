@@ -2,6 +2,21 @@ import Phaser from "phaser";
 import {Tower} from "../components";
 import SuperScene from "./super";
 
+const textStyleBig = {
+  fontFamily: 'sans-serif',
+  fontSize: 28,
+  color: '#5059cc',
+  shadow: {
+    offsetX: 1,
+    offsetY: 1,
+    color: '#000',
+    blur: 0,
+  }
+}
+
+const textStyleMedium = Object.assign({}, textStyleBig, { fontSize: 22 });
+const textStyleSecondary = Object.assign({}, textStyleBig, { fontSize: 14, color: '#781c1c', shadow: {} });
+
 export default class Prep extends SuperScene {
   create() {
     super.create();
@@ -67,7 +82,7 @@ class MenuObject extends Phaser.GameObjects.Container {
     this.bg.setOrigin(0, 0);
     this.add(this.bg);
 
-    this.currentMoney = scene.add.text(260, 180, 'XX,XXX');
+    this.currentMoney = scene.add.text(255, 170, 'XX,XXX', textStyleBig);
     this.add(this.currentMoney);
 
     // Contains all the store item cards
@@ -105,9 +120,9 @@ class StoreCard extends Phaser.GameObjects.Container {
 
     this.storeKey = specs.key;
     this.bg = scene.add.image(-20, 0, 'StoreTileBg');
-    this.rangeText = scene.add.text(-40, -54, specs.range || 'XX');
-    this.fireRateText = scene.add.text(-40, -39, specs.fireRate || 'XX');
-    this.priceText = scene.add.text(-35, 33, specs.price || 'X,XXX');
+    this.rangeText = scene.add.text(-40, -54, specs.range || 'XX', textStyleSecondary);
+    this.fireRateText = scene.add.text(-40, -39, specs.fireRate || 'XX', textStyleSecondary);
+    this.priceText = scene.add.text(-40, 28, specs.price || 'X,XXX', textStyleMedium);
     this.previewImg = scene.add.image(0, 0, StoreCard.SpriteMap[specs.key]);
 
     this.bg.scaleX = this.bg.scaleY = 0.3;
