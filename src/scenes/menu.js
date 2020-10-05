@@ -7,6 +7,7 @@ import TurretTile from "../assets/Sprites/turret-tile.png"
 import MenuBackground from "../assets/Sprites/menu-background.png"
 import StoreTileBg from "../assets/Sprites/shop-card.png";
 import StoreCardTower1 from "../assets/Sprites/shop-tower-basic.png";
+import MainMenuArt from "../assets/Sprites/menu-art.png";
 import MediGame from "../assets/Audio/MedievalDefence.wav";
 import MediMenu from "../assets/Audio/MedievalMenu.mp3";
 
@@ -14,6 +15,7 @@ import SuperScene from "./super";
 
 export default class Menu extends SuperScene {
   preload() {
+    this.load.image("MainMenuArt", MainMenuArt);
     this.load.image("Background",Background);
     this.load.image("Turretbase",Turretbase);
     this.load.image("EmptyTile",EmptyTile);
@@ -22,6 +24,7 @@ export default class Menu extends SuperScene {
     this.load.image("MenuBackground", MenuBackground);
     this.load.image("StoreTileBg", StoreTileBg);
     this.load.image("StoreCardTower1", StoreCardTower1);
+
     this.load.audio("dopeBeats", MediMenu);
     this.load.audio("doperBeats", MediGame);
   }
@@ -37,5 +40,9 @@ export default class Menu extends SuperScene {
       db.stop();
       this.scene.switch("prep");
     });
+
+
+    const menuArt = this.add.image(this.game.config.width / 2, this.game.config.height / 2,"MainMenuArt");
+    menuArt.scaleX = menuArt.scaleY = 0.4;
   }
 }
