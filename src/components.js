@@ -40,6 +40,7 @@ Enemy.schema = {
   name: { type: Types.String },
   health: { type: Types.Number, default: 3 },
   speed: { type: Types.Number },
+  cooldown: {type : Types.Number, default: 10}
 }
 
 export class Location extends Component {}
