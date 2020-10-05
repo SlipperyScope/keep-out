@@ -36,7 +36,7 @@ export default class EnemiesSystem extends System {
             enemy.cooldown = 10 //gamejam, match it to the emitter so they are not on top of each other
           }
         }
-      }else{enemy.cooldown --}
+      }else{enemy.cooldown--;}
     });
   }
 
