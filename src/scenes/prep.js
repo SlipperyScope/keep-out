@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import {Tower} from "../components";
+import {Tower, TowerHover, TowerHoverEnd} from "../components";
 import SuperScene from "./super";
 
 const textStyleBig = {
@@ -22,6 +22,8 @@ export default class Prep extends SuperScene {
   create() {
     super.create();
     this.input.on("gameobjectdown", (p, g) => this.onObjectClicked(g));
+    this.input.on("gameobjectover", (p, g) => this.onObjectOver(g));
+    this.input.on("gameobjectout", (p, g) => this.onObjectOut(g));
 
     const spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     spaceKey.on("down", () => {
@@ -66,8 +68,17 @@ export default class Prep extends SuperScene {
 
   onObjectClicked(gameObject) {
     const coords = gameObject.getData("coords");
-    console.log("clicked: ", coords);
     this.game.world.createEntity().addComponent(Tower, {x: coords[0], y: coords[1]});
+  }
+
+  onObjectOver(gameObject) {
+    const coords = gameObject.getData("coords");
+    this.game.world.createEntity().addComponent(TowerHover, {x: coords[0], y: coords[1]});
+  }
+
+  onObjectOut(gameObject) {
+    const coords = gameObject.getData("coords");
+    this.game.world.createEntity().addComponent(TowerHoverEnd, {x: coords[0], y: coords[1]});
   }
 }
 

@@ -1,5 +1,5 @@
-import { System } from 'ecsy';
-import { Tile, Tower, CheckTower, Path, Stats, Sprite } from '../components';
+import { System, Not } from 'ecsy';
+import { Tile, Tower, CheckTower, TowerHover, TowerHoverEnd, ShowRange, Path, Stats, Sprite } from '../components';
 
 export default class CheckTowerSystem extends System {
     execute(delta) {
@@ -17,6 +17,8 @@ export default class CheckTowerSystem extends System {
             ent.removeComponent(Path);
             ent.removeComponent(CheckTower);
         });
+
+        this.checkHovers();
     }
 
     checkPath(path) {
@@ -35,8 +37,41 @@ export default class CheckTowerSystem extends System {
         return canAfford;
     }
 
+    checkHovers() {
+        if (this.queries.hoverEnds.results.length) {
+            this.queries.hoverTiles.results.slice().forEach(ent => {
+                ent.removeComponent(ShowRange);
+            });
+        }
+        this.queries.hoverEnds.results.forEach(ent => {
+            ent.removeComponent(TowerHoverEnd);
+        });
+
+        this.queries.hovers.results.forEach(ent => {
+            const towerHover = ent.getComponent(TowerHover);
+            let matchingTileEntity = this.queries.emptyTiles.results.find(et => {
+                let { x, y } = et.getComponent(Tile);
+                return x === towerHover.x && y === towerHover.y;
+            });
+            if (matchingTileEntity) {
+                const tile = matchingTileEntity.getComponent(Tile);
+                this.queries.tiles.results.forEach(tEnt => {
+                    const t = tEnt.getComponent(Tile);
+                    if (Math.hypot(t.x - tile.x, t.y - tile.y) <= 1) {
+                        tEnt.addComponent(ShowRange);
+                    }
+                });
+            }
+            ent.removeComponent(TowerHover);
+        });
+    }
 }
 CheckTowerSystem.queries = { 
   toCheck: { components: [Tower, CheckTower, Tile, Path] },
-  stats: { components: [Stats]},
+  tiles: { components: [Tile] },
+  emptyTiles: { components: [Tile, Not(Tower)] },
+  hoverTiles: { components: [Tile, ShowRange] },
+  hovers: { components: [TowerHover] },
+  hoverEnds: { components: [TowerHoverEnd] },
+  stats: { components: [Stats] },
 }
