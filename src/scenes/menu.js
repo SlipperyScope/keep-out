@@ -7,8 +7,9 @@ import TurretTile from "../assets/Sprites/turret-tile.png"
 import MenuBackground from "../assets/Sprites/menu-background.png"
 import StoreTileBg from "../assets/Sprites/shop-card.png";
 import StoreCardTower1 from "../assets/Sprites/shop-tower-basic.png";
-import MediMenu from "../assets/Audio/MedievalMenu.wav";
 import MediGame from "../assets/Audio/MedievalDefence.wav";
+import MediMenu from "../assets/Audio/MedievalMenu.mp3";
+
 import SuperScene from "./super";
 
 export default class Menu extends SuperScene {
