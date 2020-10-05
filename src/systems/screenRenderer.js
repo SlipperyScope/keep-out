@@ -1,5 +1,6 @@
 import { System } from "ecsy";
 import { Enemy, Location, Path, Phaser, Tile, Sprite } from "../components";
+import translateToScreen from "../Utils/translateToScreen";
 
 export default class GridRenderSystem extends System {
   execute() {
@@ -22,17 +23,16 @@ export default class GridRenderSystem extends System {
         const activeEnemies = this.queries.enemies.results;
         activeEnemies.forEach((ent) => {
           const enemyLocation = ent.getComponent(Location);
-          const xLocation = enemyLocation.x * 100 + 100;
-          const yLocation = enemyLocation.y * 20 + 100;
 
+          const screenCords = translateToScreen(enemyLocation.x,enemyLocation.y)
           if (ent.getMutableComponent(Sprite)) {
             const spriteToUpdate = ent.getMutableComponent(Sprite);
-            spriteToUpdate.sprite.x = xLocation;
-            spriteToUpdate.sprite.y = yLocation;
+            spriteToUpdate.sprite.x = screenCords.x;
+            spriteToUpdate.sprite.y = screenCords.y;
           } else {
             const enemySprite = activeScene.add.image(
-              xLocation,
-              yLocation,
+                screenCords.x,
+                screenCords.y,
               "badRock"
             );
             enemySprite.scaleX = 0.1;
@@ -47,11 +47,10 @@ export default class GridRenderSystem extends System {
         tileResults.forEach((ent) => {
           const tile = ent.getComponent(Tile);
           // add text at tile.x, tile.y except project coordinates of tiles to coordinates of canvas
-          const xLocation = tile.x * 100 + 100;
-          const yLocation = tile.y * 20 + 100;
+          const screenCords = translateToScreen(tile.x,tile.y)
           const sprite = activeScene.add.image(
-            xLocation,
-            yLocation,
+            screenCords.x,
+            screenCords.y,
             tile.isOccupied ? "greenRock" : "brownRock"
           );
           sprite.setInteractive().setData("coords", [tile.x, tile.y]);
