@@ -13,11 +13,7 @@ export default class Prep extends SuperScene {
     });
 
     const menuHeight = 700;
-    this.menuBg = this.add.image(this.game.config.width, this.game.config.height - menuHeight, 'MenuBackground');
-    this.menuBg.displayHeight = menuHeight;
-    this.menuBg.scaleX = this.menuBg.scaleY;
-    this.menuBg.setOrigin(0, 0);
-    this.menuBg.depth = 9999;
+    this.menu = this.storeMenu(this.game.config.width, this.game.config.height - menuHeight, menuHeight);
 
     // These don't actually work. I think it's because of the menu switching and I don't care
     // enough fix it yet.
@@ -33,21 +29,35 @@ export default class Prep extends SuperScene {
   }
 
   menuIn() {
+    console.log(this.menu.displayWidth);
     this.tweens.add({
-      targets: this.menuBg,
+      targets: this.menu,
       ease: 'Quad.easeIn',
-      x: this.game.config.width - this.menuBg.displayWidth,
+      x: this.game.config.width - 360, // Game jam
       duration: 300
     });
   }
 
   menuOut() {
     this.tweens.add({
-      targets: this.menuBg,
+      targets: this.menu,
       ease: 'Quad.easeOut',
       x: this.game.config.width,
       duration: 300
     });
+  }
+
+  storeMenu(x, y, menuHeight) {
+    const container = this.add.container(x, y);
+    container.depth = 9999;
+
+    const bg = this.add.image(0, 50, 'MenuBackground');
+    bg.displayHeight = menuHeight;
+    bg.scaleX = bg.scaleY;
+    bg.setOrigin(0, 0);
+
+    container.add(bg);
+    return container;
   }
 
   onObjectClicked(gameObject) {
