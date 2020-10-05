@@ -84,11 +84,11 @@ export default class GridSystem extends System {
   providePathing() {
     this.queries.providePathing.added.forEach(ent => {
       const path = ent.getMutableComponent(Path);
-      console.log('Pathing', path);
+      // console.log('Pathing', path);
       if (!path.path.length && path.from && path.to) {
         const nodes = this.pathFinder.find(path.from.join(','), path.to.join(','));
         path.path = nodes.reverse().map(n => n.id.split(',').map(Number));
-        console.log('Path!', path.from, path.to);
+        // console.log('Path!', path.from, path.to);
         this.printPath(path.path);
       }
     });
@@ -114,7 +114,7 @@ export default class GridSystem extends System {
       }
       rows.push(row.join(''));
     }
-    console.log(rows.join('\n'));
+    // console.log(rows.join('\n'));
   }
 }
 

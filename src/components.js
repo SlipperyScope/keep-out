@@ -55,3 +55,8 @@ EnemyEmitter.schema = {
   releaseRate: { type: Types.Number },
   cooldown: { type: Types.Number },
 }
+
+export class Sprite extends Component {};
+Sprite.schema = {
+  sprite: {type: Types.Ref}
+}
