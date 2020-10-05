@@ -1,5 +1,5 @@
 import { System } from 'ecsy';
-import { Tile, Tower, CheckTower, Path, Stats } from '../components';
+import { Tile, Tower, CheckTower, Path, Stats, Sprite } from '../components';
 
 export default class CheckTowerSystem extends System {
     execute(delta) {
@@ -8,6 +8,7 @@ export default class CheckTowerSystem extends System {
             const tower = ent.getComponent(Tower);
             if (this.checkPath(ent.getComponent(Path).path) && this.checkMoney(stats, tower)) {
                 stats.money -= tower.price;
+                ent.removeComponent(Sprite);
                 console.log("Tower successfully added at (", tower.x, tower.y, "). You have $",stats.money);
             } else {
                 ent.removeComponent(Tower);

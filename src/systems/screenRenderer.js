@@ -10,10 +10,7 @@ export default class GridRenderSystem extends System {
     )[0];
 
     // Add things to the active scene outside the switch to add to all scenes.
-    const background = activeScene.add.image(640,360,"Background")
-    background.displayWidth = game.config.width
-    background.displayHeight = game.config.height
-
+    const tileScenes = game.scene.scenes.filter((s) => s.scene.key === "prep" || s.scene.key === "play");
 
     // Add UI elements to particular scenes
     activeScene.add.text(700, 700, activeScene.scene.key);
@@ -47,16 +44,22 @@ export default class GridRenderSystem extends System {
         const tileResults = this.queries.tiles.results;
         //activeScene.add.text(700,700,"play")
         tileResults.forEach((ent) => {
-          const tile = ent.getComponent(Tile);
-          // add text at tile.x, tile.y except project coordinates of tiles to coordinates of canvas
-          const screenCords = translateToScreen(tile.x,tile.y)
-          const sprite = activeScene.add.image(
-            screenCords.x,
-            screenCords.y,
-            tile.isOccupied ? "TurretTile" : "EmptyTile"
-          );
-          sprite.setInteractive().setData("coords", [tile.x, tile.y]);
-          sprite.displayHeight = sprite.displayWidth = 80
+          if (!ent.getComponent(Sprite)) {
+            const tile = ent.getComponent(Tile);
+            // add text at tile.x, tile.y except project coordinates of tiles to coordinates of canvas
+            let sprite;
+            const screenCords = translateToScreen(tile.x,tile.y)
+            tileScenes.forEach(scene => {
+              sprite = scene.add.image(
+                screenCords.x,
+                screenCords.y,
+                tile.isOccupied ? "TurretTile" : "EmptyTile"
+              );
+              sprite.setInteractive().setData("coords", [tile.x, tile.y]);
+              sprite.displayHeight = sprite.displayWidth = 80
+            });
+            ent.addComponent(Sprite, {sprite});
+          }
         });
         break;
       default:
