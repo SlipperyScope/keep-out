@@ -13,7 +13,8 @@ export default class Prep extends SuperScene {
     });
 
     const menuHeight = 700;
-    this.menu = this.storeMenu(this.game.config.width, this.game.config.height - menuHeight, menuHeight);
+    this.menu = new MenuObject(this, this.game.config.width, this.game.config.height - menuHeight, menuHeight);
+    this.menu.addStoreItem({ range: 5, fireRate: 8, price: 100, key: 'tower1' });
 
     // These don't actually work. I think it's because of the menu switching and I don't care
     // enough fix it yet.
@@ -47,22 +48,79 @@ export default class Prep extends SuperScene {
     });
   }
 
-  storeMenu(x, y, menuHeight) {
-    const container = this.add.container(x, y);
-    container.depth = 9999;
-
-    const bg = this.add.image(0, 50, 'MenuBackground');
-    bg.displayHeight = menuHeight;
-    bg.scaleX = bg.scaleY;
-    bg.setOrigin(0, 0);
-
-    container.add(bg);
-    return container;
-  }
-
   onObjectClicked(gameObject) {
     const coords = gameObject.getData("coords");
     console.log("clicked: ", coords);
     this.game.world.createEntity().addComponent(Tower, {x: coords[0], y: coords[1]});
   }
+}
+
+// Game Jam!
+class MenuObject extends Phaser.GameObjects.Container {
+  constructor(scene, x, y, menuHeight, children) {
+    super(scene, x, y, children);
+    this.depth = 9999;
+
+    this.bg = scene.add.image(0, 50, 'MenuBackground');
+    this.bg.displayHeight = menuHeight;
+    this.bg.scaleX = this.bg.scaleY;
+    this.bg.setOrigin(0, 0);
+    this.add(this.bg);
+
+    this.currentMoney = scene.add.text(260, 180, 'XX,XXX');
+    this.add(this.currentMoney);
+
+    // Contains all the store item cards
+    this.storeItems = scene.add.container(140, 315);
+    this.add(this.storeItems);
+
+    scene.add.existing(this);
+  }
+
+  setCurrentMoney(money) {
+    // Update some text field
+    this.currentMoney.text = money;
+  }
+
+  addStoreItem(specs) {
+    const item = new StoreCard(this.scene, 0, 0, specs);
+    this.storeItems.add(item);
+  }
+
+  removeStoreItem(key) {
+    let item = null;
+    this.storeItems.iterate(child => {
+      if (child.storeKey === key) item = child;
+    });
+    if (item) {
+      // This should actually redraw the grid so there aren't holes, but game jam
+      this.storeItems.remove(item);
+    }
+  }
+}
+
+class StoreCard extends Phaser.GameObjects.Container {
+  constructor(scene, x, y, specs, children) {
+    super(scene, x, y, children);
+
+    this.storeKey = specs.key;
+    this.bg = scene.add.image(-20, 0, 'StoreTileBg');
+    this.rangeText = scene.add.text(-40, -54, specs.range || 'XX');
+    this.fireRateText = scene.add.text(-40, -39, specs.fireRate || 'XX');
+    this.priceText = scene.add.text(-35, 33, specs.price || 'X,XXX');
+    this.previewImg = scene.add.image(0, 0, StoreCard.SpriteMap[specs.key]);
+
+    this.bg.scaleX = this.bg.scaleY = 0.3;
+    this.previewImg.scaleX = this.previewImg.scaleY = 0.3;
+
+    this.add(this.bg);
+    this.add(this.rangeText);
+    this.add(this.fireRateText);
+    this.add(this.priceText);
+    this.add(this.previewImg);
+  }
+}
+
+StoreCard.SpriteMap = {
+  'tower1': 'StoreCardTower1',
 }
