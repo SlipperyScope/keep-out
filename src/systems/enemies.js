@@ -20,6 +20,7 @@ export default class EnemiesSystem extends System {
       const enemy = ent.getMutableComponent(Enemy);
       if (enemy.health <= 0) {
         console.log(`${enemy.name} has died`);
+        stats.money += 10;
         ent.removeAllComponents();
       }
       if(enemy.cooldown === 0) {
