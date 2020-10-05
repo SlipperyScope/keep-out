@@ -58,6 +58,10 @@ EnemyEmitter.schema = {
   cooldown: { type: Types.Number },
 }
 
+export class Sprite extends Component {};
+Sprite.schema = {
+  sprite: {type: Types.Ref}
+}
 export class Stats extends Component {};
 Stats.schema = {
   points: { type: Types.Number },

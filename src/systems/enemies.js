@@ -32,7 +32,7 @@ export default class EnemiesSystem extends System {
           const [nextX, nextY] = path.path[currentIndex + 1];
           location.x = nextX;
           location.y = nextY;
-          console.log(`${enemy.name} moved to (${nextX}, ${nextY})`);
+          // console.log(`${enemy.name} moved to (${nextX}, ${nextY})`);
         }
       }
     });
@@ -53,7 +53,7 @@ export default class EnemiesSystem extends System {
 
           this.index++;
           emitter.remaining--;
-          console.log(`Spawning an enemy, ${emitter.remaining} to go!`);
+          // console.log(`Spawning an enemy, ${emitter.remaining} to go!`);
 
           emitter.cooldown = emitter.releaseRate;
           if (emitter.remaining === 0) {
