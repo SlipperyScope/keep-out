@@ -21,15 +21,15 @@ export default class LudumWorld {
       .registerSystem(Enemies)
       .registerSystem(GridRenderer);
 
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
+    for (let y = 0; y < 6; y++) {
+      for (let x = 0; x < 11; x++) {
         this.world.createEntity()
-          .addComponent(components.Tile, { x, y, id: `${x},${y}`, isOccupied: x === 6 && y < 9 });
+          .addComponent(components.Tile, { x, y, id: `${x},${y}`, isOccupied: x === 6 && y < 5 });
       }
     }
 
     // This entity should get a path that goes all the way down and back up to avoid the wall
-    this.world.createEntity().addComponent(components.Path, { from: [0,0], to: [9,0] });
+    this.world.createEntity().addComponent(components.Path, { from: [0,0], to: [10,3] });
 
     this.world.createEntity().addComponent(components.Stats, {points: 0, health: 69, money: 420, BAWN: false});
   }
