@@ -32,7 +32,7 @@ export default class Prep extends SuperScene {
 
     const menuHeight = 700;
     this.menu = new MenuObject(this, this.game.config.width, this.game.config.height - menuHeight, menuHeight);
-    this.menu.addStoreItem({ range: 5, fireRate: 8, price: 100, key: 'tower1' });
+    this.menu.addStoreItem({ range: 1, fireRate: 3, price: 50, key: 'tower1' });
 
     // These don't actually work. I think it's because of the menu switching and I don't care
     // enough fix it yet.
