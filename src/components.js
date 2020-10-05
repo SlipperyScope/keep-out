@@ -35,8 +35,6 @@ Tower.schema = {
   _pool: {type: Types.Boolean }, //gamejam btw
 }
 
-export class CheckTower extends TagComponent {};
-
 export class Enemy extends Component {};
 Enemy.schema = {
   name: { type: Types.String },
@@ -69,3 +67,5 @@ Stats.schema = {
   money: { type: Types.Number },
   BAWN: { type: Types.Boolean },
 }
+
+export class CheckTower extends TagComponent {};
