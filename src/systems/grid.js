@@ -114,7 +114,7 @@ export default class GridSystem extends System {
       }
       rows.push(row.join(''));
     }
-    // console.log(rows.join('\n'));
+    console.log(rows.join('\n'));
   }
 }
 
