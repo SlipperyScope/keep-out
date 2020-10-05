@@ -5,8 +5,6 @@ export default class EnemiesSystem extends System {
   constructor() {
     super(...arguments);
     this.index = 0;
-    this.curIndex = 0;
-
   }
 
   execute() {
