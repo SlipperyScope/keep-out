@@ -24,6 +24,7 @@ export default class LudumGame extends Phaser.Game {
   startOurWonderfulGame() {
     // Create Phaser singleton entity so ECSY systems can interact with the scene and the renderer and stuff
     this.world.createEntity().addComponent(PhaserComponent, { game: this });
+
     this.scene.start('menu');
 
     // Run the ECS systems every frame
